@@ -40,19 +40,35 @@ namespace BudgetWise.API.Controllers
 
             }
 
-        // GET: api/Expense/5
+        // GET: api/expense?startDate=2025-08-01&endDate=2025-08-31&creditCardId=2
         [HttpGet("{id}")]
-        public async Task<ActionResult<Expense>> GetExpense(int id)
+        public async Task<ActionResult<IEnumerable<Expense>>> GetExpense(
+            [FromQuery] DateTime? startDate,
+            [FromQuery] DateTime? endDate,
+            [FromQuery] int? creditCardId)
         {
-            var expense = await _context.Expenses
+            var expense = _context.Expenses
+                .Where(e => !e.IsDeleted)
                 .Include(e => e.CreditCard)
-                .FirstOrDefaultAsync(e => e.Id == id && !e.IsDeleted);
-            if (expense == null)
+                .AsQueryable();
+
+            if (startDate.HasValue)
             {
-                return NotFound();
+                expense = expense.Where(e => e.Date >= startDate.Value);
             }
-            
-            return expense;
+            if (endDate.HasValue)
+            {   
+                expense = expense.Where(e => e.Date <= endDate.Value);
+
+            }
+            if (creditCardId.HasValue)
+            {
+                expense = expense.Where(e => e.CreditCardId == creditCardId.Value);
+            }
+
+            return await expense
+                .OrderByDescending(e => e.Date)
+                .ToListAsync();
         }
 
         //Delete: api/Expense/5 (soft delete)
