@@ -30,6 +30,7 @@ namespace BudgetWise.Infrastructure.Data
             modelBuilder.Entity<CreditCard>()
                 .Property(c => c.CurrentBalance)
                 .HasPrecision(18, 2);
+
         }
 
 

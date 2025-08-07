@@ -4,20 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BudgetWise.Core.Entities
+namespace BudgetWise.Shared.DTO
 {
-    public class CreditCard
+    public class CreditCardDto
     {
-        public int Id { get; set; }
-        public string? Name { get; set; }
-        public string? Bank { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public string Bank { get; set; } = string.Empty;
         public decimal CurrentBalance { get; set; }
         public DateTime BillingCycleStart { get; set; }
         public DateTime BillingCycleEnd { get; set; }
-        public ICollection<Expense> Expenses { get; set; }
-        public bool IsDeleted { get; set; } = false;
-
-
 
     }
 }
