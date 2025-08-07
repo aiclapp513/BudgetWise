@@ -70,5 +70,28 @@ namespace BudgetWise.API.Controllers
             await _context.SaveChangesAsync();
             return NoContent();
         }
+
+        // PUT: api/Expense/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateExpense(int id, [FromBody] ExpenseDto Dto)
+        {
+            if (Dto == null)
+            {
+                return BadRequest("Expense data is null.");
+            }
+            var expense = await _context.Expenses.FindAsync(id);
+            if (expense == null || expense.IsDeleted)
+            {
+                return NotFound();
+            }
+            expense.Name = Dto.Name;
+            expense.Amount = Dto.Amount;
+            expense.Date = Dto.Date;
+            expense.Category = Dto.Category;
+            expense.Frequency = Dto.Frequency;
+            expense.CreditCardId = Dto.CreditCardId;
+            await _context.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }
