@@ -21,8 +21,4 @@
     <ProjectReference Include="..\BudgetWise.Shared\BudgetWise.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>
