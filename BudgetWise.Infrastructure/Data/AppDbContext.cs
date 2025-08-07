@@ -22,6 +22,14 @@ namespace BudgetWise.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Expense>()
+                .Property(e => e.Amount)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<CreditCard>()
+                .Property(c => c.CurrentBalance)
+                .HasPrecision(18, 2);
         }
 
 
