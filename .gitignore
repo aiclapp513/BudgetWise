@@ -1,0 +1,44 @@
+﻿# Build artifacts
+bin/
+obj/
+out/
+*.dll
+*.exe
+*.log
+
+# Visual Studio / JetBrains
+.vs/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# NuGet
+*.nupkg
+project.lock.json
+artifacts/
+
+# Node / React frontend (if you add UI later)
+node_modules/
+npm-debug.log*
+yarn.lock
+pnpm-lock.yaml
+dist/
+build/
+
+# Environment & secrets
+*.env
+.env.*
+secrets.json
+appsettings.Development.json
+appsettings.Local.json
+
+# AWS credentials (never commit these!)
+.aws/
+*.pem
+*.ppk
+
+# System files
+.DS_Store
+Thumbs.db
